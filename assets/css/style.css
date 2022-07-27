@@ -1,0 +1,60 @@
+body {
+    font-family: 'Fira Sans', sans-serif;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+  }
+  
+
+.p-4 {
+    padding: 0.375rem;
+}
+ 
+.min-100-vw {
+    min-width: 100vw;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.text-dark {
+    color: #1a1a1a;
+}
+  
+.text-white {
+    color: #ffffff;
+}
+  
+.text-black {
+    color: #000000;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
+  }
+  
+.text-right {
+    text-align: right;
+}
+
+.bg-primary {
+    background-color: #2d3e50;
+}
+
+.list-group-item {
+   flex-direction: row; 
+}
