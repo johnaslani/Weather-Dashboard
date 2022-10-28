@@ -54,28 +54,50 @@
         
         <section class="flex-column" id="weather">
             <div id="currentWeather">
-                <h1 class="text-primary" id="today">City Name and Date</h1>
-                
+                <!-- <h1 class="text-primary" id="today">City Name and Date</h1> -->
+                <h2 class="text-primary" id="today"></h2>
                     <p>Temp: <span id="temp"></span></p>
                     <p>Wind: <span id="wind"></span></p>
                     <p>Humidity: <span id="humidity"></span></p>
-                    <p>UV Index: <span id="uvIndex"></span></p>
+                    <p>UV Index: <span id="uvIndex"></span></p> 
+                    <!-- Add background color to UV Index -->
                 
             </div>
-            
-            <div class="col-5 flex-row" id="forcastWeather">           
-                    <tb class="flex-row" id="day1">day1</tb>
-                    <tb class="flex-row" id="day2">day2</tb>
-                    <tb class="flex-row" id="day3">day3</tb>
-                    <tb class="flex-row" id="day4">day4</tb>
+            <h3>5-day Forcast:</h3>           
+            <div class="col-5 flex-row" id="forcastWeather">
+                    <!-- <h3>5-day Forcast:</h3>            -->
+                    <tb class="flex-column" id="day1">day1</tb>
+                        <h4>Date: <span id="date1"></span></h4>
+                        <!-- Symbol -->
+                        <p>Temp: <span id="temp1"></span></p>
+                        <p>Wind: <span id="wind1"></span></p>
+                        <p>Humidity: <span id="humidity1"></span></p>
+                    <tb class="flex-column" id="day2">day2</tb>
+                        <h4>Date: <span id="date2"></span></h4>
+                        <!-- Symbol -->
+                        <p>Temp: <span id="temp2"></span></p>
+                        <p>Wind: <span id="wind2"></span></p>
+                        <p>Humidity: <span id="humidity2"></span></p>
+                    <tb class="flex-column" id="day3">day3</tb>
+                        <h4>Date: <span id="date3"></span></h4>
+                        <!-- Symbol -->
+                        <p>Temp: <span id="temp3"></span></p>
+                        <p>Wind: <span id="wind3"></span></p>
+                        <p>Humidity: <span id="humidity3"></span></p>
+                    <tb class="flex-column" id="day4">day4</tb>
+                        <h4>Date: <span id="date4"></span></h4>
+                        <!-- Symbol -->
+                        <p>Date: <span id="temp4"></span></p>
+                        <p>Wind: <span id="wind4"></span></p>
+                        <p>Humidity: <span id="humidity4"></span></p>
                     <tb class="flex-row" id="day5">day5</tb>
+                        <h4>Temp: <span id="date5"></span></h4>
+                        <!-- Symbol -->
+                        <p>Date: <span id="temp5"></span></p>
+                        <p>Wind: <span id="wind5"></span></p>
+                        <p>Humidity: <span id="humidity5"></span></p>
             </div>
         </section>
-    
-
-
-
-        <!-- <script src="./assets/js/display-search.js"></script> -->
         <script src="./assets/scripts.js"></script>
     </main>
 </body>

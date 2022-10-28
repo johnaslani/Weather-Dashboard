@@ -27,9 +27,9 @@ function getApi(event) {
     APIKey;
   var requestUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
   fetch(requestUrl).then(function (response) {
-    // console.log(response);
+    console.log(response);
     if (!response.ok) {
-      // console.log("Please select a city name");
+      console.log("Please select a city name");
       return;
     }
     // displayWeather(response.json());
@@ -42,14 +42,8 @@ function getApi(event) {
 
       today.textContent = data.name + " (" + humanDateFormat[0] + ")";
       console.log(data);
-      var cityToSave = {
-        city: data.name,
-        lat: data.coord.lat,
-        lon: data.coord.lon,
-      };
-      createButton(cityToSave);
-      saveToLocalStorage(cityToSave);
-      getWeather(cityToSave.lat, cityToSave.lon);
+      createButton(data);
+      getWeather(data.coord.lat, data.coord.lon);
     });
   });
 }
@@ -81,10 +75,9 @@ function recallWeather(e) {
   console.log(e.target);
   console.log(e.target.value);
   console.log(e.target.dataset);
-  // const coordinates = JSON.parse(e.target.dataset.coord);
-  // console.log(coordinates);
-  // getWeather(coordinates.lat, coordinates.lon);
-  getWeather(e.target.dataset.lat, e.target.dataset.lon);
+  const coordinates = JSON.parse(e.target.dataset.coord);
+  console.log(coordinates);
+  getWeather(coordinates.lat, coordinates.lon);
 }
 
 function displayWeather(data) {
@@ -104,9 +97,9 @@ function displayWeather(data) {
     const milliseconds = forCastDay.dt * 1000; // 1575909015000
     const dateObject = new Date(milliseconds);
     const humanDateFormat = dateObject.toLocaleString().split(","); //2019-12-9 10:30:15
-    // console.log(forCastDay.temp.day);
-    // console.log(forCastDay.wind_speed);
-    // console.log(forCastDay.humidity);
+    console.log(forCastDay.temp.day);
+    console.log(forCastDay.wind_speed);
+    console.log(forCastDay.humidity);
     // document.getElementById(`day${i}`).temp;
     document.getElementById(`temp${i}`).textContent = forCastDay.temp.day;
     document.getElementById(`wind${i}`).textContent = forCastDay.wind_speed;
@@ -114,15 +107,14 @@ function displayWeather(data) {
   }
 }
 
-function createButton(cityInfo) {
+function createButton(cityname, lat, lon) {
   // for (var i = 0; i < data.length; i++) {
   var listItem = document.createElement("button");
   //listItem.textContent = data[i].git html_url;
-  listItem.textContent = cityInfo.city;
-  // listItem.dataset.coord = JSON.stringify(data.coord);
-  listItem.dataset.lat = cityInfo.lat;
-  listItem.dataset.lon = cityInfo.lon;
+  listItem.textContent = cityname;
+  listItem.dataset.coord = JSON.stringify(data.coord);
   cityList.appendChild(listItem);
+  saveToLocalStorage(city, data.coord.lat, data.coord.lon);
   //}
 }
 
@@ -134,10 +126,13 @@ function createButton(cityInfo) {
 
 // Based on the provided information, save the contents to
 //  local storage if the city is not already stored.
-function saveToLocalStorage(cityInfo) {
+function saveToLocalStorage(city, lat, lon) {
   // Save to local storage if the city hasn't already been saved
   var history = JSON.parse(localStorage.getItem("city")) || [];
-  history.push(cityInfo);
+
+  var cityToSave = { city: city, lat: lat, lon: lon };
+
+  history.push(cityToSave);
   localStorage.setItem("city", JSON.stringify(history));
 
   // Ensure the city isn't already in storage.
@@ -149,9 +144,9 @@ function saveToLocalStorage(cityInfo) {
 
 function getHistory() {
   var history = JSON.parse(localStorage.getItem("city")) || [];
-  // console.log(history);
+  console.log(history);
   for (let i = 0; i < history.lenght; i++) {
-    createButton(history[i]);
+    createButton(cityname);
   }
 }
 
