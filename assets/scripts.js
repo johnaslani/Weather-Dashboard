@@ -11,7 +11,7 @@ var humidity = document.getElementById("humidity");
 var uvIndex = document.getElementById("uvIndex");
 var today = document.getElementById("today");
 var todayDate = new Date();
-
+var today_date = document.getElementById("today_date");
 function getApi(event) {
   event.preventDefault();
   city = searchInput.value;
@@ -35,19 +35,14 @@ function getApi(event) {
     // displayWeather(response.json());
     response.json().then((data) => {
       console.log(data);
+      today.textContent = data.name;
 
-      const milliseconds = data.dt * 1000; // 1575909015000
-      const dateObject = new Date(milliseconds);
-      const humanDateFormat = dateObject.toLocaleString().split(","); //2019-12-9 10:30:15
-
-      today.textContent = data.name + " (" + humanDateFormat[0] + ")";
       console.log(data);
       var cityToSave = {
         city: data.name,
         lat: data.coord.lat,
         lon: data.coord.lon,
       };
-      createButton(cityToSave);
       saveToLocalStorage(cityToSave);
       getWeather(cityToSave.lat, cityToSave.lon);
     });
@@ -70,6 +65,19 @@ function getWeather(lat, lon) {
     // }
     // displayWeather(response.json());
     response.json().then((data) => {
+      console.log(data);
+      const milliseconds = data.current.dt * 1000; // 1575909015000
+      const dateObject = new Date(milliseconds);
+      const humanDateFormat = dateObject.toLocaleString().split(","); //2019-12-9 10:30:15
+      const icon = document.createElement("img");
+      icon.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
+      );
+      // current.weather.icon (Weather icon id.) =>
+      today_date.textContent = " (" + humanDateFormat[0] + ") ";
+      today.appendChild(icon);
+      // today_date.appendChild(icon);
       displayWeather(data);
     });
   });
@@ -77,13 +85,7 @@ function getWeather(lat, lon) {
 
 // Reacal Latitude and loingitude from Local storage and recall the getWeather
 function recallWeather(e) {
-  console.log(e);
-  console.log(e.target);
-  console.log(e.target.value);
-  console.log(e.target.dataset);
-  // const coordinates = JSON.parse(e.target.dataset.coord);
-  // console.log(coordinates);
-  // getWeather(coordinates.lat, coordinates.lon);
+  today.textContent = e.target.textContent;
   getWeather(e.target.dataset.lat, e.target.dataset.lon);
 }
 
@@ -95,10 +97,21 @@ function displayWeather(data) {
   humidity.textContent = weather.humidity;
   wind.textContent = weather.wind_speed;
   uvIndex.textContent = weather.uvi;
+  if (weather.uvi < 3) {
+    uvIndex.style.background = "green";
+  } else if (weather.uvi < 6) {
+    uvIndex.style.background = "yellow";
+  } else if (weather.uvi < 8) {
+    uvIndex.style.background = "orange";
+  } else {
+    uvIndex.style.background = "red";
+  }
   for (let i = 1; i <= 5; i++) {
     // date[i] = Symbol[i] = day[i].temp.textContent = forcast[i].temp.day;
     // day[i].humidity.textContent = forcast[i].humidity;
     // day[i].wind.textContent = forcast[i].wind_speed;
+
+    // daily.weather.icon (Weather icon id)
     const forCastDay = data.daily[i];
     console.log(forCastDay);
     const milliseconds = forCastDay.dt * 1000; // 1575909015000
@@ -111,6 +124,12 @@ function displayWeather(data) {
     document.getElementById(`temp${i}`).textContent = forCastDay.temp.day;
     document.getElementById(`wind${i}`).textContent = forCastDay.wind_speed;
     document.getElementById(`humidity${i}`).textContent = forCastDay.humidity;
+    document
+      .getElementById(`img${i}`)
+      .setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${forCastDay.weather[0].icon}.png`
+      );
   }
 }
 
@@ -137,9 +156,14 @@ function createButton(cityInfo) {
 function saveToLocalStorage(cityInfo) {
   // Save to local storage if the city hasn't already been saved
   var history = JSON.parse(localStorage.getItem("city")) || [];
+  console.log(history);
+  for (i = 0; i < history.length; i++) {
+    console.log(history[i].city, cityInfo.city);
+    if (history[i].city == cityInfo.city) return;
+  }
   history.push(cityInfo);
   localStorage.setItem("city", JSON.stringify(history));
-
+  createButton(cityInfo);
   // Ensure the city isn't already in storage.
   // var cityAlreadySaved = savedCity.includes(city); // returns bool
   // if (!cityIsAlreadySaved) {
@@ -150,7 +174,7 @@ function saveToLocalStorage(cityInfo) {
 function getHistory() {
   var history = JSON.parse(localStorage.getItem("city")) || [];
   // console.log(history);
-  for (let i = 0; i < history.lenght; i++) {
+  for (let i = 0; i < history.length; i++) {
     createButton(history[i]);
   }
 }

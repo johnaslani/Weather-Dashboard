@@ -12,6 +12,10 @@ h6 {
   font-weight: 700;
 }
 
+#uvIndex {
+  background: rgb(5, 124, 31);
+}
+
 #search {
 }
 
@@ -23,7 +27,9 @@ h6 {
 
 #forcastWeather {
 }
-
+tb {
+  width: 150px;
+}
 .p-4 {
   padding: 0.375rem;
 }
