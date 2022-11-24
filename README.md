@@ -2,8 +2,6 @@
 
 ## Weather dashboard to show the weather outlook for multiple cities
 
-## Work Day Scheduler
-
 Using the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities.
 
 This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
