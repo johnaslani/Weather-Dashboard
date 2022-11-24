@@ -10,13 +10,9 @@ This app will run in the browser and feature dynamically updated HTML and CSS po
 
 Made by John Aslani
 
-## License
+## License: MIT
 
-MIT
-
-This program licensed under MIT :
-
-https://img.shields.io/badge/license-MIT-blue
+This program licensed under [MIT](https://img.shields.io/badge/license-MIT-blue)
 
 ## Screenshot
 
@@ -30,8 +26,9 @@ https://johnaslani.github.io/Weather-Dashboard/
 
 ## Questions
 
-For further information see [my GitHub](https://github.com/johnaslani)
+For further information see [my GitHub](https://github.com/johnaslani) or [Weather-Dashboard](https://github.com/johnaslani/Weather-Dashboard)
 
-Should you have any questions, reach me at aslani.john@gmail.com
+
+Should you have any questions, please reach me at [aslani.john@gmail.com](mailto:aslani.john@gmail.com)
 
 
