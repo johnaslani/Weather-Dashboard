@@ -51,7 +51,7 @@ function getApi(event) {
 
 function getWeather(lat, lon) {
   var requestUrl =
-    "http://api.openweathermap.org/data/2.5/onecall?lat=" +
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
     lat +
     "&lon=" +
     lon +
@@ -72,7 +72,7 @@ function getWeather(lat, lon) {
       const icon = document.createElement("img");
       icon.setAttribute(
         "src",
-        `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
+        `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
       );
       // current.weather.icon (Weather icon id.) =>
       today_date.textContent = " (" + humanDateFormat[0] + ") ";
@@ -128,7 +128,7 @@ function displayWeather(data) {
       .getElementById(`img${i}`)
       .setAttribute(
         "src",
-        `http://openweathermap.org/img/wn/${forCastDay.weather[0].icon}.png`
+        `https://openweathermap.org/img/wn/${forCastDay.weather[0].icon}.png`
       );
   }
 }
