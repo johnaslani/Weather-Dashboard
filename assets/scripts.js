@@ -20,12 +20,12 @@ function getApi(event) {
   //URL associated with Current Weather Data
   // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
   //api.openweathermap.org/data/2.5/weather?q={city}&appid={APIKey}
-  var requestUrl =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
-    city +
-    "&appid=" +
-    APIKey;
-  var requestUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
+  // var requestUrl =
+  //   "https://api.openweathermap.org/data/2.5/weather?q=" +
+  //   city +
+  //   "&appid=" +
+  //   APIKey;
+  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
   fetch(requestUrl).then(function (response) {
     // console.log(response);
     if (!response.ok) {
